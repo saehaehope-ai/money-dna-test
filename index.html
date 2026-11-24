@@ -163,6 +163,7 @@ button{font-family:inherit;cursor:pointer}
 <body>
 <main class="wrap" id="app" aria-live="polite"></main>
 <div class="toast" id="toast" hidden></div>
+<div class="modal" id="copyModal" hidden><div class="in"><p style="font-size:15px;font-weight:700;margin-bottom:8px">아래 글을 길게 눌러 복사해 주세요</p><textarea id="copyArea" readonly style="width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:10px;font:inherit;font-size:14px;line-height:1.6;color:var(--mauve);margin-bottom:10px"></textarea><button class="btn ghost" id="copyClose">닫기</button></div></div>
 <div class="modal" id="modal" hidden><div class="in"><img id="modalImg" alt="나의 돈 감정 유형 결과 이미지"><p style="font-size:14px;margin-bottom:10px">이미지를 길게 눌러 저장해 주세요.</p><button class="btn ghost" id="modalClose">닫기</button></div></div>
 
 <script>
@@ -536,8 +537,7 @@ function showResult(a, fresh){
     '</section>' +
     '<div class="actions">' +
       '<button class="btn full" id="saveBtn">내 결과 이미지 저장하기</button>' +
-      '<button class="btn ghost" id="shareBtn">카카오톡으로 공유하기</button>' +
-      '<button class="btn ghost" id="copyBtn">테스트 링크 복사하기</button>' +
+      '<button class="btn ghost full" id="copyBtn">친구에게 보낼 링크 복사하기</button>' +
     '</div>' +
     '<p class="hint">저장한 이미지를 인스타그램 스토리로 공유해 보세요!</p>' +
 
@@ -609,9 +609,8 @@ function showResult(a, fresh){
     '<p class="foot">돈을 많이 버는 사람과 돈 앞에서 편안한 사람은 반드시 같지 않습니다.<br>돈을 대하는 나의 생각과 행동을 이해하는 것부터 경제적 성장이 시작됩니다.<br><br>이 테스트는 심리학적으로 검증된 진단검사가 아니라 돈 습관을 돌아보는 자기성찰 콘텐츠입니다.<br>응답 내용은 이 기기에만 잠시 저장되며 어디로도 전송되지 않습니다.<br>© 김새해 · 김새해의 2분 돈 감정 테스트</p>';
 
   document.getElementById('saveBtn').onclick = saveImage;
-  document.getElementById('shareBtn').onclick = function(){ share(r.main); };
   document.getElementById('shareBtn2').onclick = function(){ share(r.main); };
-  document.getElementById('copyBtn').onclick = function(){ copyText(shareUrl(r.main)).then(function(ok){ toast(ok ? '테스트 링크를 복사했어요.' : '링크를 길게 눌러 복사해 주세요.'); }); };
+  document.getElementById('copyBtn').onclick = function(){ copyShare(r.main); };
   document.getElementById('retryBtn').onclick = function(){ clearAns(); ans = []; step = 0; history.replaceState(null, '', baseUrl()); renderStart(); toTop(); };
   if (fresh) toTop();
   setTimeout(function(){ Array.prototype.forEach.call(document.querySelectorAll('.tr i'), function(i){ i.style.width = i.getAttribute('data-w') + '%'; }); }, 150);
@@ -628,10 +627,24 @@ function legacyCopy(s){
   document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand('copy'); } catch(e){}
   document.body.removeChild(ta); return ok;
 }
+// 공유 문구 + 링크를 복사한다. 복사가 막힌 브라우저(일부 앱 안 브라우저)는 글을 띄워 길게 눌러 복사하게 한다
+function copyShare(type){
+  var msg = SHARE_TEXT + '\n' + shareUrl(type);
+  copyText(msg).then(function(ok){
+    if (ok) { toast('복사했어요. 카카오톡이나 문자에 붙여 넣어 주세요.'); return; }
+    var box = document.getElementById('copyModal');
+    document.getElementById('copyArea').value = msg;
+    box.hidden = false;
+    try { document.getElementById('copyArea').select(); } catch(e){}
+  });
+}
+// 휴대폰 공유 창이 있으면 열고, 없거나 실패하면 복사로 넘어간다
 function share(type){
-  var url = shareUrl(type);
-  if (navigator.share) navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: url }).catch(function(){});
-  else copyText(SHARE_TEXT + '\n' + url).then(function(ok){ toast(ok ? '공유 문구와 링크를 복사했어요. 카카오톡에 붙여 넣어 주세요.' : '링크를 길게 눌러 복사해 주세요.'); });
+  if (navigator.share) {
+    navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: shareUrl(type) }).catch(function(e){
+      if (!e || e.name !== 'AbortError') copyShare(type);
+    });
+  } else copyShare(type);
 }
 
 /* ---------------- 결과 이미지 (1080×1920) ---------------- */
@@ -724,6 +737,7 @@ function saveImage(){
   }, 'image/png');
 }
 document.getElementById('modalClose').onclick = function(){ document.getElementById('modal').hidden = true; };
+document.getElementById('copyClose').onclick = function(){ document.getElementById('copyModal').hidden = true; };
 
 var saved = loadAns(), cameFromShare = new URLSearchParams(location.search).has('from');
 if (saved && !cameFromShare) { ans = saved; showResult(saved, false); } else renderStart();
