@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>김새해의 5분 돈 감정 테스트 · MY MONEY DNA TEST</title>
+<meta name="description" content="나는 돈을 대하는 어떤 사람일까? 12개의 질문으로 알아보는 나의 돈 감정 유형과 5가지 돈 감정 능력치">
+<meta property="og:type" content="website">
+<meta property="og:title" content="나는 돈을 대하는 어떤 사람일까?">
+<meta property="og:description" content="김새해의 5분 돈 감정 테스트 · 8가지 유형과 5가지 능력치로 알아보는 나의 돈 감정">
+<meta property="og:url" content="https://saehaehope-ai.github.io/money-dna-test/">
+<meta property="og:image" content="https://saehaehope-ai.github.io/money-dna-test/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--mauve:#574047;--coral:#E98272;--rose:#D98C91;--peach:#FCE8DF;--cream:#FFF7F0;--white:#FFFFFF;--line:#F2D6CC;--soft:#8A7378}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream)}
+body{font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--mauve);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+button{font-family:inherit;cursor:pointer}
+[hidden]{display:none!important}
+.wrap{max-width:560px;margin:0 auto;padding:26px 18px 56px;min-height:100vh}
+.brand{font-size:12px;letter-spacing:.18em;font-weight:700;color:var(--rose);text-align:center}
+.brand b{color:var(--mauve)}
+.p{margin:0 0 10px}
+.card{background:var(--white);border-radius:22px;padding:24px 20px;margin:16px 0;box-shadow:0 2px 14px rgba(87,64,71,.06)}
+.kicker{font-size:12px;letter-spacing:.14em;font-weight:800;color:var(--coral);margin-bottom:4px}
+.card h2{font-size:20px;line-height:1.45;margin-bottom:12px;font-weight:800}
+.btn{display:block;width:100%;border:0;border-radius:999px;background:var(--coral);color:var(--white);font-weight:800;font-size:17px;padding:17px 20px;text-align:center;text-decoration:none;box-shadow:0 6px 16px rgba(233,130,114,.28)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:var(--white);color:var(--mauve);border:1.5px solid var(--line);box-shadow:none;font-weight:700;font-size:15px;padding:14px 10px;white-space:nowrap}
+.note{font-size:13px;color:var(--soft);text-align:center;margin-top:14px;line-height:1.6}
+.hero{text-align:center;padding:24px 0 6px}
+.eyebrow{display:inline-block;background:var(--peach);color:var(--mauve);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px}
+.hero h1{font-size:30px;line-height:1.38;margin:18px 0 12px;font-weight:800}
+.hero .sub{opacity:.88}
+.meta{display:flex;justify-content:center;gap:8px;margin:16px 0 0;flex-wrap:wrap}
+.meta span{font-size:13px;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.friend{background:var(--white);border:1.5px solid var(--rose);border-radius:16px;padding:14px 16px;text-align:center;margin:18px 0 0;font-size:15px}
+.friend b{color:var(--coral)}
+.checks{list-style:none;margin:4px 0 14px}
+.checks li{position:relative;padding:9px 0 9px 32px;border-bottom:1px dashed var(--line)}
+.checks li:last-child{border-bottom:0}
+.checks li:before{content:"";position:absolute;left:3px;top:15px;width:16px;height:16px;border-radius:50%;background:var(--peach);border:2px solid var(--rose)}
+.preview{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.preview div{background:var(--cream);border-radius:14px;padding:12px;font-size:14px;line-height:1.5}
+.preview b{display:block;color:var(--coral);font-size:13px;margin-bottom:2px}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin:12px 0 10px;font-size:14px;font-weight:700}
+.bar{height:8px;background:var(--peach);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--coral);border-radius:999px;transition:width .35s ease}
+.qno{color:var(--coral);font-weight:800;font-size:15px;margin:26px 0 6px}
+.qtext{font-size:22px;line-height:1.5;font-weight:800;margin-bottom:20px;min-height:66px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--white);border:1.5px solid var(--line);border-radius:16px;padding:15px 16px;font-size:16px;line-height:1.6;color:var(--mauve);transition:border-color .15s,background .15s}
+.opt .k{flex:0 0 26px;height:26px;border-radius:50%;background:var(--peach);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.opt:hover{border-color:var(--rose)}
+.opt.on{border-color:var(--coral);background:#FFF1EC}
+.opt.on .k{background:var(--coral);color:var(--white)}
+.back{background:none;border:0;color:var(--soft);font-size:14px;margin-top:18px;padding:8px 4px;text-decoration:underline}
+.loading{text-align:center;padding:120px 0 0}
+.spin{width:64px;height:64px;border-radius:50%;border:6px solid var(--peach);border-top-color:var(--coral);margin:0 auto 26px;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.loading h2{font-size:20px;margin-bottom:8px}
+.loading p{color:var(--soft);min-height:28px}
+.rcard{background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 60%,#FFF4EE 100%);border-radius:28px;padding:26px 18px 22px;text-align:center;box-shadow:0 6px 22px rgba(87,64,71,.10);margin:14px 0 12px;position:relative;overflow:hidden}
+.rcard:before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:var(--peach);opacity:.7}
+.rcard>*{position:relative}
+.rcard .who{font-size:14px;font-weight:700;color:var(--rose)}
+.rcard .no{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.16em;font-weight:800;color:var(--white);background:var(--mauve);border-radius:999px;padding:3px 12px}
+.rcard h1{font-size:32px;line-height:1.3;margin:10px 0 4px;font-weight:800}
+.rcard h1 .plus{color:var(--rose)}
+.rcard .tag{font-size:16px;font-weight:700}
+.rcard .en{font-size:12px;letter-spacing:.18em;color:var(--coral);font-weight:800;margin-top:2px}
+.rcard .quote{background:var(--cream);border-radius:16px;padding:14px 16px;margin:16px 0 4px;font-size:16px;font-weight:700;line-height:1.6}
+.radar{display:block;width:calc(100% + 24px);max-width:440px;margin:8px -12px 0}
+.stage-pill{display:inline-flex;gap:6px;align-items:center;background:var(--peach);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:800;margin-top:4px}
+.stage-pill i{font-style:normal;color:var(--coral)}
+.mixnote{font-size:13px;color:var(--soft);margin-top:10px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:4px 0 4px}
+.actions .full{grid-column:1 / -1}
+.hint{font-size:13px;color:var(--soft);text-align:center;margin:6px 0 4px}
+.stat{padding:12px 0;border-bottom:1px dashed var(--line)}
+.stat:last-of-type{border-bottom:0}
+.stat .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.stat .nm{font-weight:800;font-size:16px}
+.stat .nm small{display:block;font-weight:500;color:var(--soft);font-size:13px}
+.stat .v{font-weight:800;color:var(--coral);font-variant-numeric:tabular-nums;font-size:20px}
+.stat .tr{height:10px;background:var(--peach);border-radius:999px;overflow:hidden;margin:6px 0 6px}
+.stat .tr i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--coral));border-radius:999px;transition:width 1s ease}
+.stat .ds{font-size:14px;line-height:1.6}
+.stat .lv{display:inline-block;font-size:12px;font-weight:800;border-radius:6px;padding:1px 7px;margin-right:6px;background:var(--cream);color:var(--mauve)}
+.stat .lv.hi{background:#FDE3DC;color:#C2574A}
+.stat .lv.lo{background:#F3ECEE;color:var(--soft)}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;margin-top:4px;overflow:hidden;border-radius:14px;border:1px solid var(--line)}
+.tbl th,.tbl td{padding:11px 10px;text-align:left;vertical-align:top;line-height:1.55}
+.tbl th{background:var(--cream);font-weight:800;width:32%;border-bottom:1px solid var(--line)}
+.tbl td{border-bottom:1px solid var(--line)}
+.tbl tr:last-child th,.tbl tr:last-child td{border-bottom:0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0 14px}
+.steps div{text-align:center;padding:10px 4px;border-radius:14px;background:var(--cream);font-size:13px;line-height:1.4;color:var(--soft)}
+.steps div b{display:block;font-size:12px;letter-spacing:.06em;margin-bottom:2px}
+.steps div.done{background:var(--peach);color:var(--mauve)}
+.steps div.now{background:var(--coral);color:var(--white);box-shadow:0 4px 12px rgba(233,130,114,.3)}
+.nowbox{background:var(--cream);border-radius:16px;padding:14px 16px;font-size:15px}
+.nowbox dt{font-weight:800;color:var(--coral);font-size:13px}
+.nowbox dd{margin:0 0 8px}
+.nowbox dd:last-child{margin:0}
+.mine{list-style:none}
+.mine li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line)}
+.mine li:last-child{border-bottom:0}
+.mine li span{flex:0 0 22px;height:22px;border-radius:6px;background:var(--coral);color:var(--white);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.two{display:grid;grid-template-columns:1fr;gap:12px}
+.two .box{border-radius:18px;padding:18px 16px}
+.two .good{background:#FFF1EC}
+.two .hard{background:#F7F1F2}
+.two h3{font-size:16px;margin-bottom:6px}
+.two ul{padding-left:18px}
+.two li{margin:4px 0;font-size:15px}
+@media (min-width:520px){.two{grid-template-columns:1fr 1fr}}
+.tips{list-style:none;counter-reset:t}
+.tips li{position:relative;padding:12px 0 12px 44px;border-bottom:1px dashed var(--line)}
+.tips li:last-child{border-bottom:0}
+.tips li:before{counter-increment:t;content:counter(t);position:absolute;left:0;top:13px;width:32px;height:32px;border-radius:50%;background:var(--mauve);color:var(--white);font-weight:800;display:flex;align-items:center;justify-content:center}
+.tips b{display:block;font-size:16px}
+.tips p{font-size:15px;margin-top:2px}
+.change ol{padding-left:22px;margin:4px 0 10px}
+.mantra{background:var(--mauve);color:var(--white);border-radius:20px;padding:22px 18px;text-align:center;font-weight:700;font-size:18px;line-height:1.6;margin:16px 0}
+.mantra small{display:block;color:var(--peach);font-size:13px;font-weight:600;margin-bottom:6px;letter-spacing:.04em}
+.dist .row{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:14px}
+.dist .nm{flex:0 0 92px;font-weight:700}
+.dist .tr{flex:1;height:10px;background:var(--peach);border-radius:999px;overflow:hidden}
+.dist .tr i{display:block;height:100%;width:0;background:var(--rose);border-radius:999px;transition:width .9s ease}
+.dist .row.top .nm{color:var(--coral)}
+.dist .row.top .tr i{background:var(--coral)}
+.dist .pc{flex:0 0 40px;text-align:right;font-variant-numeric:tabular-nums;color:var(--soft)}
+.match{display:flex;gap:14px;align-items:center;background:var(--cream);border-radius:18px;padding:16px}
+.match .bd{flex:0 0 64px;height:64px;border-radius:50%;background:var(--white);border:2px solid var(--rose);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--coral);font-size:13px;text-align:center;line-height:1.2}
+.match b{display:block;font-size:17px}
+.match p{font-size:14px;margin-top:4px}
+.second{border:1.5px dashed var(--rose)}
+.cta{background:var(--mauve);color:var(--cream);border-radius:26px;padding:28px 22px;margin:24px 0 16px}
+.cta h2{color:var(--white);font-size:21px;line-height:1.5;margin-bottom:12px}
+.cta p{color:var(--peach);margin-bottom:10px}
+.cta .prod{background:rgba(255,255,255,.08);border-radius:16px;padding:16px;margin:16px 0 10px}
+.cta .prod b{display:block;color:var(--white);font-size:18px;margin-bottom:4px}
+.cta .fit{font-size:14px;color:var(--white);background:rgba(233,130,114,.25);border-radius:12px;padding:10px 12px;margin:0 0 14px}
+.grid8{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid8 div{background:var(--cream);border-radius:14px;padding:12px;font-size:13px;line-height:1.45}
+.grid8 div b{display:block;font-size:15px;margin-bottom:2px}
+.grid8 div small{color:var(--coral);font-weight:800;font-size:11px;letter-spacing:.08em}
+.grid8 div.me{background:var(--coral);color:var(--white)}
+.grid8 div.me small{color:var(--peach)}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--mauve);color:var(--white);padding:12px 18px;border-radius:999px;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.18);z-index:20;max-width:90vw;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(87,64,71,.55);display:flex;align-items:center;justify-content:center;padding:18px;z-index:30}
+.modal .in{background:var(--white);border-radius:20px;padding:16px;max-width:420px;width:100%;text-align:center}
+.modal img{width:100%;border-radius:12px;display:block;margin-bottom:10px;max-height:70vh;object-fit:contain}
+.foot{font-size:12px;color:var(--soft);text-align:center;margin-top:24px;line-height:1.7}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app" aria-live="polite"></main>
+<div class="toast" id="toast" hidden></div>
+<div class="modal" id="modal" hidden><div class="in"><img id="modalImg" alt="나의 돈 감정 유형 결과 이미지"><p style="font-size:14px;margin-bottom:10px">이미지를 길게 눌러 저장해 주세요.</p><button class="btn ghost" id="modalClose">닫기</button></div></div>
+
+<script>
+(function(){
+'use strict';
+
+var INTRO_CHECKS = [
+  '열심히 돈을 버는데도 늘 부족한 것 같아요.',
+  '통장에 돈이 있어도 마음이 편하지 않아요.',
+  '나를 위해 돈을 쓰면 괜히 미안해져요.',
+  '스트레스를 받으면 자꾸 무언가 사고 싶어요.',
+  '돈을 더 벌고 싶은데 어디서부터 시작해야 할지 모르겠어요.'
+];
+
+// 유형: 1 부족 불안 · 2 희생 헌신 · 3 감정 소비 · 4 관리 혼란 · 5 성취 집착 · 6 자유 갈망 · 7 기회 탐색 · 8 가치 창조
+var QS = [
+  {t:'통장에 돈이 들어왔을 때 가장 먼저 드는 생각은?', o:[
+    ['들어와도 금방 없어질 것 같아 걱정된다.', {1:2}],
+    ['가족과 주변 사람들에게 필요한 것을 먼저 해주고 싶다.', {2:2}],
+    ['그동안 사고 싶었던 것을 사며 기분을 내고 싶다.', {3:2,4:1}],
+    ['이 돈을 어떻게 관리하고 늘릴지 생각한다.', {8:1,5:1}]]},
+  {t:'예상하지 못한 지출이 생겼다면?', o:[
+    ['앞으로 돈이 부족해질까 봐 불안하다.', {1:2}],
+    ['가족에게 필요한 일이니 내가 감당해야 한다고 생각한다.', {2:2}],
+    ['스트레스가 쌓이고 다른 소비로 기분을 풀고 싶어진다.', {3:2,4:1}],
+    ['지출 계획을 다시 세우고 해결 방법을 찾는다.', {5:1,8:1}]]},
+  {t:'나보다 돈을 많이 버는 사람을 보면?', o:[
+    ['나는 왜 아직 경제적으로 불안할까 생각한다.', {5:2,1:1}],
+    ['저 사람은 주변 환경이나 도움을 많이 받았을 것 같다.', {2:2}],
+    ['나도 저렇게 멋지고 여유롭게 살고 싶다.', {6:2}],
+    ['어떤 능력과 전략으로 돈을 버는지 궁금하다.', {7:2,8:1}]]},
+  {t:'나를 위해 30만 원을 쓴다면?', o:[
+    ['혹시 나중에 필요할까 봐 망설인다.', {1:2}],
+    ['나보다 가족에게 쓰는 것이 더 의미 있다고 느낀다.', {2:2}],
+    ['기분은 좋지만 구매 후 후회할 것 같다.', {3:2}],
+    ['나에게 필요한 투자라면 기꺼이 쓴다.', {8:1,5:1}]]},
+  {t:'돈을 벌 때 가장 중요하게 생각하는 것은?', o:[
+    ['안정적인 수입과 비상자금.', {1:2}],
+    ['가족을 지킬 수 있는 경제력.', {2:2}],
+    ['원하는 것을 누릴 수 있는 여유.', {6:2}],
+    ['나만의 능력과 수입 구조.', {8:2}]]},
+  {t:'지금보다 수입이 두 배가 된다면?', o:[
+    ['그래도 미래를 생각하면 불안할 것 같다.', {5:2,1:1}],
+    ['가족에게 더 좋은 환경을 만들어 주고 싶다.', {2:2}],
+    ['그동안 참았던 것들을 누리고 싶다.', {6:2,3:1}],
+    ['자산을 만들고 새로운 기회를 찾겠다.', {7:1,8:2}]]},
+  {t:'돈 관리를 시작할 때 가장 어려운 것은?', o:[
+    ['돈이 줄어드는 것 자체가 두렵다.', {1:2}],
+    ['내 지출보다 가족의 지출을 먼저 생각한다.', {2:2}],
+    ['소비하고 싶은 마음을 조절하기 어렵다.', {3:2}],
+    ['수입과 지출을 체계적으로 관리하기 어렵다.', {4:2,8:1}]]},
+  {t:'경제적으로 성공한 사람에게 가장 부러운 것은?', o:[
+    ['돈 걱정 없이 편안하게 사는 모습.', {1:2}],
+    ['가족을 경제적으로 든든하게 지켜주는 모습.', {2:2}],
+    ['시간과 장소에 얽매이지 않는 자유.', {6:2}],
+    ['자신의 능력으로 큰 부와 가치를 만드는 모습.', {5:2,8:1}]]},
+  {t:'내가 가장 바라는 경제적 미래는?', o:[
+    ['돈 걱정 없이 안정적으로 사는 것.', {1:2}],
+    ['가족 모두가 부족함 없이 사는 것.', {2:2}],
+    ['원하는 시간에 원하는 일을 하며 사는 것.', {6:2}],
+    ['내 능력으로 큰 부와 자산을 만드는 것.', {5:1,8:2}]]},
+  {t:'돈에 관해 나를 가장 힘들게 하는 것은?', o:[
+    ['언제 무슨 일이 생길지 모른다는 불안.', {1:2}],
+    ['나를 위해 돈을 쓰면 이기적인 것 같은 마음.', {2:2}],
+    ['돈을 쓰고 나서 반복되는 후회.', {3:2}],
+    ['더 벌고 싶지만 어디서부터 시작할지 모르는 막막함.', {7:2,4:1}]]},
+  {t:'새로운 수입 기회가 생겼다면?', o:[
+    ['위험하지 않은지 충분히 확인한다.', {1:2}],
+    ['가족에게 피해가 가지 않을지 먼저 생각한다.', {2:2}],
+    ['지금의 삶을 즐기면서 할 수 있을지 고민한다.', {6:1,3:1}],
+    ['내 능력과 경험을 활용할 수 있다면 도전한다.', {7:2,8:1}]]},
+  {t:'지금 나에게 가장 필요한 것은?', o:[
+    ['돈에 대한 불안에서 벗어나는 마음의 안정.', {1:2}],
+    ['나 자신을 위한 선택과 경제적 독립.', {2:2}],
+    ['소비 습관과 감정 조절의 변화.', {3:2}],
+    ['수입을 늘리고 돈을 관리하는 구체적인 전략.', {4:2,7:1}]]}
+];
+
+// 5가지 돈 감정 능력치. 문항 번호(0부터): [A, B, C, D 점수]
+var STATS = [
+  {nm:'마음 안정감', ds:'돈 앞에서 마음이 편안한 정도',
+   w:{0:[0,2,3,4],1:[0,2,1,4],5:[0,3,3,4],6:[0,2,2,3],9:[0,2,2,3],10:[1,1,3,4],11:[0,3,2,4]},
+   band:['작은 지출에도 마음이 크게 흔들려요','불안할 때도 있지만 다시 중심을 잡아요','돈 앞에서도 마음이 비교적 편안해요']},
+  {nm:'나를 아끼는 힘', ds:'나를 위해 돈을 쓰고 선택하는 힘',
+   w:{0:[2,0,3,3],1:[2,0,2,3],3:[1,0,3,4],6:[2,0,2,2],9:[2,0,1,3],11:[2,0,2,3]},
+   band:['나를 위한 지출을 자꾸 뒤로 미뤄요','필요할 땐 나를 챙기려고 해요','나를 위한 지출도 당당하게 선택해요']},
+  {nm:'소비 조절력', ds:'감정이 아니라 필요에 따라 쓰는 힘',
+   w:{0:[3,3,0,4],1:[3,3,0,4],3:[4,3,1,3],5:[3,3,1,3],6:[3,2,0,2],9:[3,3,0,3],11:[3,3,0,3]},
+   band:['기분에 따라 지출이 크게 달라져요','대체로 조절하지만 흔들리는 날이 있어요','필요한 곳에 쓰고 멈출 줄 알아요']},
+  {nm:'흐름 관리력', ds:'돈이 들어오고 나가는 흐름을 아는 정도',
+   w:{0:[2,1,1,4],1:[2,1,1,4],4:[3,2,1,3],6:[2,1,1,0],10:[3,2,1,3],11:[2,1,1,2]},
+   band:['돈이 어디로 가는지 잘 보이지 않아요','큰 흐름은 알지만 세부는 놓치곤 해요','수입과 지출의 흐름을 잘 알고 있어요']},
+  {nm:'수입 확장력', ds:'수입을 늘릴 방법을 찾고 실행하는 힘',
+   w:{2:[1,0,2,4],4:[1,1,2,4],5:[0,1,1,4],7:[1,1,3,4],8:[1,1,3,4],10:[0,1,2,4]},
+   band:['지금의 수입을 지키는 데 집중해요','더 벌 방법에 관심이 생기고 있어요','내 능력으로 수입을 키우려고 움직여요']}
+];
+
+// 돈과의 관계 4단계 (능력치 평균으로 정한다)
+var STAGES = [
+  {nm:'알아차리기', now:'돈 앞에서 올라오는 감정을 알아차리기 시작하는 단계예요.', next:'불안이나 죄책감이 올라올 때 "지금 나는 ○○하구나" 하고 감정에 이름 붙여 보기'},
+  {nm:'이해하기', now:'내가 돈 앞에서 반복하는 패턴을 이해해 가는 단계예요.', next:'한 달 총수입 · 고정 지출 · 변동 지출, 숫자 세 개를 적어 보기'},
+  {nm:'다스리기', now:'감정보다 나만의 기준으로 돈을 선택하는 단계예요.', next:'나를 위한 예산과 저축을 월급날 자동으로 나눠 두기'},
+  {nm:'키우기', now:'돈으로 원하는 삶과 가치를 키워 가는 단계예요.', next:'내 경험과 능력을 반복 가능한 수입 구조로 만들어 보기'}
+];
+
+var TYPES = {
+ 1:{name:'부족 불안형', tag:'안전을 찾아 헤매는 사람', en:'THE SECURITY SEEKER',
+  quote:'돈이 있어도 마음은 아직 안심하지 못해요.',
+  about:['당신은 미래를 대비하려는 마음이 강한 사람입니다.','돈이 들어와도 앞으로 나갈 지출을 먼저 생각하고, 예상하지 못한 일이 생기면 실제 상황보다 더 큰 불안감을 느낄 수 있습니다.','어쩌면 과거에 경제적으로 어려웠던 경험이나 가족을 책임져야 한다는 부담이 지금의 돈에 대한 태도에 영향을 주고 있을지도 모릅니다.'],
+  good:['신중하고 책임감이 강합니다.','미래를 준비하려는 의지가 있습니다.','위험을 미리 살피는 능력이 있습니다.'],
+  hard:['돈이 있어도 부족하다고 느낍니다.','돈을 쓰는 순간 불안해집니다.','현재의 여유보다 미래의 걱정을 먼저 생각합니다.'],
+  change:['막연한 불안과 실제 재정 상황을 구분해 보세요. 이번 달 생활비, 고정 지출, 비상자금을 숫자로 확인하는 것부터 시작하세요.','당신에게 필요한 것은 무조건 더 많은 돈이 아니라 돈을 이해하고 통제할 수 있다는 감각입니다.'],
+  mantra:'나는 불안이 아니라 사실과 숫자를 기준으로 돈을 선택합니다.',
+  mine:['통장 잔고를 하루에도 여러 번 확인한다','돈을 쓰고 나면 한동안 마음이 불편하다','비상금이 있어도 늘 모자란 것 같다','"혹시 모르니까"가 입버릇이다'],
+  table:{see:'지켜야 할 것, 대비해야 할 것', trig:'예상하지 못한 지출, 잔고가 줄어드는 순간', habit:'쓰기 전에 망설이고, 쓰고 나서 불안해한다', key:'불안과 숫자를 나눠 보는 연습'},
+  tips:[['불안과 숫자 나누기','걱정되는 돈 문제를 적고, 그 옆에 실제 숫자(잔고 · 고정 지출)를 적어 보세요. 막연한 불안이 구체적인 숫자가 되면 크기가 줄어들어요.'],['비상자금에 이름 붙이기','"3개월 안심 통장"처럼 목적이 분명한 통장을 하나 만들어 보세요. 금액보다 "준비돼 있다"는 감각이 먼저 마음을 놓이게 해요.'],['잔고는 하루 한 번만','잔고 확인을 하루 한 번으로 정해 보세요. 불안할 때마다 확인하는 습관이 오히려 불안을 키우기도 해요.']],
+  match:6, matchWhy:'미래를 지키는 당신과 지금의 삶을 넓히는 자유 갈망형은 서로에게 없는 시선을 줘요. 함께 계획하면 안정과 여유가 균형을 이뤄요.',
+  fit:'"돈이 있어도 불안한 이유"를 이해하고, 숫자로 안심하는 습관을 만들고 싶은 분께 맞아요.'},
+ 2:{name:'희생 헌신형', tag:'나보다 모두를 먼저 챙기는 사람', en:'THE SELFLESS GIVER',
+  quote:'다른 사람을 위해서는 아낌없이 쓰지만 나를 위해서는 망설여져요.',
+  about:['당신은 주변 사람을 생각하는 마음이 깊은 사람입니다.','가족에게 필요한 것은 기꺼이 사주지만 자신에게 필요한 것은 계속 미루기도 합니다.','나를 위해 돈을 쓰면 사치처럼 느껴지고, 다른 사람에게 쓰는 돈은 당연한 책임처럼 느껴질 수 있습니다.'],
+  good:['배려심과 책임감이 있습니다.','사랑하는 사람을 위해 행동합니다.','관계와 가족을 소중히 여깁니다.'],
+  hard:['나를 위한 지출에 죄책감을 느낍니다.','경제적 선택에서 나 자신을 뒤로 미룹니다.','다른 사람의 필요를 나의 필요보다 중요하게 생각합니다.'],
+  change:['나를 위한 지출도 삶을 유지하는 데 필요한 비용이라는 사실을 기억하세요. 배움, 휴식, 건강, 성장에 쓰는 돈도 가치 있는 선택입니다.','이번 달에는 나를 위한 예산을 별도로 정해보세요.'],
+  mantra:'나도 내가 아끼고 돌봐야 할 소중한 사람입니다.',
+  mine:['가족 선물은 고민 없이 사지만 내 것은 장바구니에만 둔다','나를 위해 쓴 돈에는 꼭 이유를 붙인다','"나는 괜찮아"라는 말을 자주 한다','내 이름으로 모아 둔 돈이 거의 없다'],
+  table:{see:'사랑하는 사람을 지키는 수단', trig:'나를 위해 돈을 쓰려는 순간', habit:'내 몫은 미루고 남의 몫을 먼저 챙긴다', key:'나를 위한 예산을 먼저 떼어 두기'},
+  tips:[['나를 위한 예산 먼저 떼기','이번 달 수입에서 "나를 위한 돈"을 먼저 떼어 두세요. 작은 금액이어도 내 몫이 있다는 사실이 중요해요.'],['이유 없이 나에게 주기','일주일에 한 번, 이유를 붙이지 않고 나를 위해 작은 것을 사 보세요. 죄책감이 올라와도 괜찮아요. 알아차리는 것이 시작이에요.'],['거절 한 문장 연습하기','"이번엔 어려워"라는 말을 미리 연습해 두세요. 나를 지키는 말이 있어야 돈도 지킬 수 있어요.']],
+  match:8, matchWhy:'사람을 아끼는 당신과 가치를 구조로 만드는 가치 창조형이 만나면, 나눔이 나를 소진시키지 않고 오래 이어지는 방법을 찾을 수 있어요.',
+  fit:'"나를 위해 돈을 쓰지 못하는 이유"를 이해하고, 나를 돌보는 돈 습관을 만들고 싶은 분께 맞아요.'},
+ 3:{name:'감정 소비형', tag:'소비로 마음을 위로하는 사람', en:'THE EMOTIONAL SPENDER',
+  quote:'힘들었던 하루를 보상받고 싶어서 자꾸 무언가를 사게 돼요.',
+  about:['당신은 소비를 통해 감정을 해소하는 경향이 있을 수 있습니다.','스트레스가 심한 날, 외로운 날, 자신이 초라하게 느껴지는 날에 무언가를 구매하면 잠시 기분이 좋아집니다.','하지만 시간이 지나면 후회하거나 다시 소비하고 싶은 마음이 생길 수 있습니다.'],
+  good:['자신이 원하는 것을 알고 있습니다.','삶의 즐거움을 중요하게 생각합니다.','감정에 민감하고 경험을 소중히 여깁니다.'],
+  hard:['기분에 따라 소비가 달라집니다.','구매 직후의 만족감이 오래가지 않습니다.','소비 후 후회와 죄책감이 반복됩니다.'],
+  change:['무언가 사고 싶을 때 잠시 멈추고 질문해 보세요.','"나는 지금 이 물건이 필요한 걸까, 아니면 위로가 필요한 걸까?"','소비를 억지로 참기보다 돈을 쓰지 않고도 나를 위로하는 방법을 늘려보세요.'],
+  mantra:'나는 소비하지 않아도 충분히 위로받고 행복해질 수 있습니다.',
+  mine:['힘든 날엔 장바구니부터 연다','택배 상자를 열 때가 하루 중 가장 설렌다','카드 명세서를 보기가 두렵다','산 물건보다 사는 순간이 더 기억에 남는다'],
+  table:{see:'지친 나를 달래 주는 위로', trig:'스트레스, 외로움, 초라하게 느껴지는 날', habit:'기분이 가라앉으면 결제 버튼을 누른다', key:'필요한 것이 물건인지 위로인지 구분하기'},
+  tips:[['24시간 장바구니','사고 싶은 것은 바로 결제하지 말고 장바구니에 하루만 두세요. 다음 날에도 필요하다면 그때 사도 늦지 않아요.'],['감정에 이름 붙이기','결제 전 "지금 나는 지쳤구나, 외롭구나" 하고 감정에 이름을 붙여 보세요. 필요한 것이 물건인지 위로인지 보이기 시작해요.'],['돈 들지 않는 위로 목록','산책, 따뜻한 차, 좋아하는 노래처럼 돈을 쓰지 않고 나를 달래는 방법 다섯 가지를 적어 두세요.']],
+  match:1, matchWhy:'신중하게 지키는 부족 불안형은 당신에게 멈추는 힘을, 당신은 그들에게 지금을 누리는 법을 알려줘요.',
+  fit:'"쓰고 나서 반복되는 후회"의 이유를 이해하고, 감정과 소비를 분리하고 싶은 분께 맞아요.'},
+ 4:{name:'관리 혼란형', tag:'돈의 흐름을 놓치고 있는 사람', en:'THE MONEY WANDERER',
+  quote:'돈을 벌기는 하는데 어디에 얼마나 쓰는지 잘 모르겠어요.',
+  about:['당신은 돈을 벌기 위해 열심히 살아왔지만 돈을 관리하는 방법을 체계적으로 배울 기회가 적었을 수 있습니다.','수입이 들어오면 생활비, 카드값, 각종 지출로 빠져나가고 월말에는 남는 돈이 별로 없다는 생각이 듭니다.'],
+  good:['현실적인 문제를 해결하려는 마음이 있습니다.','돈 관리의 필요성을 알고 있습니다.','새로운 방법을 배우려는 가능성이 있습니다.'],
+  hard:['수입과 지출을 정확히 파악하지 못합니다.','계획 없이 돈을 사용하기 쉽습니다.','재무 관리가 복잡하고 어렵게 느껴집니다.'],
+  change:['이번 달에는 세 가지만 기록하세요.'], changeList:['한 달 총수입','반드시 나가는 고정 지출','어디에 썼는지 모르는 변동 지출'], changeAfter:['돈의 흐름을 알게 되면 무엇부터 바꿔야 하는지 보이기 시작합니다.'],
+  mantra:'내 돈의 흐름을 이해하는 순간 경제적 변화가 시작됩니다.',
+  mine:['월급날이 지나면 돈이 어디로 갔는지 모르겠다','고정 지출이 정확히 얼마인지 말하기 어렵다','가계부를 여러 번 시작했다가 그만뒀다','카드값이 생각보다 많이 나와 놀란 적이 있다'],
+  table:{see:'들어오면 금방 빠져나가는 것', trig:'카드값 결제일, 월말에 남은 잔고를 볼 때', habit:'계획 없이 쓰고 나중에 정리하려 한다', key:'숫자 세 개로 흐름부터 보기'},
+  tips:[['숫자 세 개만 적기','한 달 총수입, 고정 지출, 변동 지출. 이 세 숫자만 알아도 돈의 흐름이 보이기 시작해요.'],['통장 나누기','생활비 통장과 저축 통장을 나눠 보세요. 복잡한 가계부보다 통장 두 개가 더 오래갑니다.'],['일주일에 10분 돈 점검','요일 하나를 정해 지난주에 쓴 돈을 10분만 훑어보세요. 완벽하게 기록하지 않아도 괜찮아요.']],
+  match:1, matchWhy:'숫자를 꼼꼼히 살피는 부족 불안형과 함께하면 돈의 흐름을 잡는 습관이 자연스럽게 생겨요. 당신의 유연함은 그들의 긴장을 풀어 줘요.',
+  fit:'"열심히 벌어도 남지 않는 이유"를 이해하고, 돈의 흐름을 처음부터 세우고 싶은 분께 맞아요.'},
+ 5:{name:'성취 집착형', tag:'더 벌어야 안심하는 사람', en:'THE ACHIEVEMENT SEEKER',
+  quote:'아직 충분하지 않아요. 더 많이 벌어야 해요.',
+  about:['당신은 목표가 높고 성취 욕구가 강한 사람입니다.','하지만 돈을 버는 성과와 자신의 가치를 연결하면 아무리 많이 벌어도 만족하기 어려울 수 있습니다.','쉬는 순간에도 불안하고, 다른 사람보다 뒤처지는 것 같아 자신을 계속 몰아붙일 수 있습니다.'],
+  good:['목표 의식이 강합니다.','실행력과 책임감이 있습니다.','더 나은 결과를 만들려는 의지가 있습니다.'],
+  hard:['성취해도 만족감이 오래가지 않습니다.','자신을 끊임없이 다른 사람과 비교합니다.','휴식할 때 죄책감을 느낍니다.'],
+  change:['돈을 많이 버는 것과 잘 사는 것은 같은 의미가 아닙니다.','내가 원하는 수입뿐 아니라 원하는 생활 방식과 충분히 쉴 수 있는 시간도 함께 목표로 설정해 보세요.'],
+  mantra:'나의 가치는 통장 잔액이나 성과로 결정되지 않습니다.',
+  mine:['목표를 이루면 바로 다음 목표를 세운다','쉬는 날에도 일 생각이 떠나지 않는다','다른 사람의 수입이 자꾸 신경 쓰인다','"이 정도로는 부족해"라는 생각을 자주 한다'],
+  table:{see:'나의 가치를 증명하는 성적표', trig:'나보다 앞선 사람을 볼 때, 쉬는 순간', habit:'멈추지 않고 다음 목표로 달린다', key:'나에게 "충분한" 기준을 정하기'},
+  tips:[['"충분함"의 숫자 정하기','나에게 충분한 한 달 수입은 얼마인지 숫자로 적어 보세요. 기준이 없으면 아무리 벌어도 부족하게 느껴져요.'],['쉼도 일정에 넣기','일정표에 쉬는 시간을 먼저 적어 두세요. 쉬는 시간도 오래 달리기 위한 투자예요.'],['이룬 것 목록 쓰기','올해 이룬 것 다섯 가지를 적어 보세요. 앞만 보느라 지나친 성과가 생각보다 많을 거예요.']],
+  match:2, matchWhy:'사람을 먼저 생각하는 희생 헌신형은 당신에게 멈춰서 곁을 보는 법을, 당신은 그들에게 나를 위해 도전하는 용기를 줘요.',
+  fit:'"벌어도 만족스럽지 않은 이유"를 이해하고, 성과와 나의 가치를 분리하고 싶은 분께 맞아요.'},
+ 6:{name:'자유 갈망형', tag:'돈으로 선택권을 얻고 싶은 사람', en:'THE FREEDOM SEEKER',
+  quote:'돈이 있다면 내가 원하는 삶을 선택하고 싶어요.',
+  about:['당신에게 돈은 단순한 숫자가 아닙니다.','시간, 자유, 선택권을 만들어 주는 수단입니다.','누군가에게 의존하지 않고 원하는 일을 하며 살고 싶고, 돈 때문에 하고 싶은 일을 포기하고 싶지 않습니다.'],
+  good:['원하는 삶에 대한 기준이 있습니다.','독립적인 선택을 중요하게 생각합니다.','새로운 가능성을 탐색합니다.'],
+  hard:['현재 상황에 쉽게 답답함을 느낍니다.','자유를 얻기 위해 필요한 현실적인 계획이 부족할 수 있습니다.','원하는 삶과 현재의 경제적 상황 사이에서 갈등합니다.'],
+  change:['자유를 막연한 꿈으로 두지 마세요.','내가 원하는 생활에 매달 얼마가 필요한지, 그 돈을 어떻게 만들 것인지 구체적으로 계산해 보세요.'],
+  mantra:'경제적 자유는 내가 원하는 삶을 선택할 수 있는 힘입니다.',
+  mine:['"언젠가 경제적 자유"가 나의 꿈이다','정해진 시간과 장소에 얽매이는 삶이 답답하다','하고 싶은 일이 돈 때문에 미뤄진 적이 있다','원하는 삶은 그려지는데 숫자로 계산해 본 적은 없다'],
+  table:{see:'시간과 선택권을 사는 수단', trig:'원하는 일을 돈 때문에 포기해야 할 때', habit:'큰 그림은 그리지만 계획은 뒤로 미룬다', key:'자유에 필요한 금액을 계산하기'},
+  tips:[['자유의 가격 계산하기','원하는 삶을 살려면 매달 얼마가 필요한지 항목별로 적어 보세요. 막연한 꿈이 목표 금액이 되는 순간 길이 보여요.'],['자유 통장 만들기','원하는 삶을 위한 통장을 하나 만들고, 작은 금액이라도 매달 넣어 보세요.'],['지금 누릴 수 있는 자유 하나','큰 자유를 기다리기보다 이번 주에 할 수 있는 작은 선택 하나를 해 보세요.']],
+  match:1, matchWhy:'꼼꼼하게 준비하는 부족 불안형과 함께하면 꿈이 현실적인 계획이 되고, 당신의 자유로운 시선은 그들에게 숨 쉴 틈을 줘요.',
+  fit:'"원하는 삶과 지금 사이의 거리"를 이해하고, 자유를 숫자와 계획으로 바꾸고 싶은 분께 맞아요.'},
+ 7:{name:'기회 탐색형', tag:'가능성을 발견하고 싶은 사람', en:'THE OPPORTUNITY SEEKER',
+  quote:'더 좋은 기회가 있을 것 같은데 아직 내 길을 찾지 못했어요.',
+  about:['당신은 새로운 가능성에 관심이 많습니다.','새로운 사업, 투자, 부업, 배움에 호기심이 있고 지금보다 더 나은 방법을 찾으려고 합니다.','하지만 관심사가 많아질수록 선택이 어려워지고 실행이 늦어질 수 있습니다.'],
+  good:['호기심과 학습 욕구가 높습니다.','새로운 기회를 발견하는 데 관심이 있습니다.','변화에 열려 있습니다.'],
+  hard:['여러 가지를 동시에 시작하려 합니다.','정보 수집에 비해 실행이 늦어질 수 있습니다.','새로운 기회를 찾느라 기존의 가능성을 놓칠 수 있습니다.'],
+  change:['새로운 기회를 계속 찾기보다 하나를 선택해 충분히 실행해 보세요.','내가 가진 경험과 능력으로 가장 빠르게 가치를 만들 수 있는 분야부터 검토하세요.'],
+  mantra:'기회는 발견하는 것에서 끝나지 않습니다. 실행할 때 현실이 됩니다.',
+  mine:['부업 · 투자 정보를 저장만 해 둔 게 많다','새로운 강의나 책을 자주 산다','시작한 것보다 시작하려던 것이 더 많다','"이게 맞나" 고민하다 시기를 놓친 적이 있다'],
+  table:{see:'아직 찾지 못한 가능성', trig:'새로운 사업 · 투자 · 부업 소식을 볼 때', habit:'정보는 모으지만 실행은 늦어진다', key:'하나를 골라 90일 동안 실행하기'},
+  tips:[['하나만 고르기','지금 관심 있는 기회를 모두 적고, 그중 하나만 골라 90일 동안 집중해 보세요.'],['내 경험 목록 만들기','해 온 일, 잘하는 것, 사람들이 자주 묻는 것을 적어 보세요. 가장 빠른 기회는 이미 내 안에 있는 경우가 많아요.'],['작게 실행하기','완벽하게 준비하기보다 이번 주에 작게 시험해 볼 수 있는 한 가지를 정해 실행해 보세요.']],
+  match:8, matchWhy:'아이디어를 구조로 만드는 가치 창조형과 함께하면 당신이 발견한 기회가 실제 수입으로 이어지는 길이 보여요.',
+  fit:'"알면서도 실행이 늦어지는 이유"를 이해하고, 하나를 끝까지 해내는 돈 습관을 만들고 싶은 분께 맞아요.'},
+ 8:{name:'가치 창조형', tag:'돈을 통해 가치를 만드는 사람', en:'THE VALUE CREATOR',
+  quote:'내가 가진 능력으로 더 큰 가치를 만들고 싶어요.',
+  about:['당신은 돈을 단순히 벌고 모으는 것에서 나아가 새로운 가치를 만들어 내는 수단으로 생각합니다.','자신의 지식과 경험, 재능을 다른 사람에게 제공하고 그것을 지속 가능한 수입으로 연결하는 데 관심이 있습니다.'],
+  good:['자신의 능력을 발전시키려 합니다.','문제를 해결하고 가치를 만드는 데 관심이 있습니다.','장기적인 성장과 확장을 생각합니다.'],
+  hard:['더 큰 목표 때문에 현재의 성과를 작게 평가할 수 있습니다.','혼자 모든 것을 해결하려 할 수 있습니다.','수익 구조보다 새로운 아이디어에 집중할 수 있습니다.'],
+  change:['자신의 능력을 반복 가능한 구조로 만들어 보세요. 내가 직접 일하지 않아도 가치가 전달되고 수입이 만들어지는 시스템을 고민해 보세요.'],
+  mantra:'내가 가진 가치는 세상에 전달될 때 더 큰 경제적 가치가 됩니다.',
+  mine:['내가 아는 것을 알려줄 때 즐겁다','일한 시간만큼만 버는 구조가 아쉽다','아이디어는 많은데 손이 부족하다','지금의 성과보다 다음 목표가 더 크게 보인다'],
+  table:{see:'가치를 세상에 전달하는 도구', trig:'일한 만큼만 버는 구조를 느낄 때', habit:'새 아이디어를 계속 떠올리고 혼자 다 하려 한다', key:'능력을 반복 가능한 구조로 만들기'},
+  tips:[['반복되는 일 찾기','내가 반복해서 하는 설명이나 일을 적어 보세요. 그것이 상품이나 시스템으로 만들 첫 재료예요.'],['혼자 다 하지 않기','맡길 수 있는 일 하나를 정해 다른 사람이나 도구에 맡겨 보세요.'],['지금의 성과 기록하기','이번 달 만든 가치와 수입을 숫자로 적어 보세요. 다음 목표만 보다 지금의 성장을 놓치지 않도록요.']],
+  match:7, matchWhy:'새로운 가능성을 먼저 발견하는 기회 탐색형은 당신의 시스템에 새로운 재료를, 당신은 그들의 아이디어에 구조를 더해 줘요.',
+  fit:'"더 큰 가치를 만들고 싶은 마음"을 수입 구조로 연결하는 관점을 다시 세우고 싶은 분께 맞아요.'}
+};
+var TABLE_ROWS = [['see','돈은 나에게'],['trig','마음이 흔들리는 순간'],['habit','반복하는 습관'],['key','변화의 열쇠']];
+
+var SHARE_TITLE = '나는 돈을 대하는 어떤 사람일까?';
+var SHARE_TEXT = '나는 김새해의 5분 돈 감정 테스트를 해봤어.\n내가 돈 앞에서 어떤 생각을 하고 어떤 행동을 반복하는지 알게 됐어.\n생각보다 나 자신을 돌아보게 되는 테스트야.\n너도 한번 해봐!';
+var CHECKLIST_URL = 'https://docurise.io/saehaekim/d/money-check?utm_source=money_dna_test&utm_medium=test&utm_campaign=money_dna';
+var MONEYSHIFT_URL = 'https://docurise.io/saehaekim/d/money-shift?utm_source=money_dna_test&utm_medium=test&utm_campaign=money_dna';
+var STORE_KEY = 'saehae_money_dna_v2';
+
+/* ---------------- 계산 ---------------- */
+var MAX = {};
+for (var t0 = 1; t0 <= 8; t0++) {
+  MAX[t0] = QS.reduce(function(sum, q){ return sum + Math.max.apply(null, q.o.map(function(o){ return o[1][t0] || 0; })); }, 0);
+}
+function score(ans){
+  var raw = {}, t; for (t = 1; t <= 8; t++) raw[t] = 0;
+  ans.forEach(function(a, i){ var w = QS[i].o[a][1]; for (var k in w) raw[k] += w[k]; });
+  var norm = {}; for (t = 1; t <= 8; t++) norm[t] = MAX[t] ? raw[t] / MAX[t] : 0;
+  var order = Object.keys(norm).map(Number).sort(function(a, b){ return norm[b] - norm[a] || a - b; });
+  var top = order[0], ties = order.filter(function(x){ return Math.abs(norm[x] - norm[top]) < 1e-9; });
+  var stats = STATS.map(function(s){
+    var sum = 0, max = 0;
+    for (var qi in s.w) { sum += s.w[qi][ans[qi]]; max += Math.max.apply(null, s.w[qi]); }
+    return Math.round(15 + 80 * sum / max);
+  });
+  var avg = stats.reduce(function(a, b){ return a + b; }, 0) / stats.length;
+  // 단계 기준: 무작위 응답 10만 개에서 대략 20% · 40% · 30% · 10%로 나뉘는 선
+  var stage = avg < 56 ? 0 : avg < 63 ? 1 : avg < 70 ? 2 : 3;
+  return { norm: norm, order: order, main: top, mix: ties.length > 1 ? ties.slice(0, 2) : null, stats: stats, stage: stage, avg: avg };
+}
+function band(v){ return v < 40 ? 0 : v < 68 ? 1 : 2; }
+function validAns(a){ return Array.isArray(a) && a.length === QS.length && a.every(function(x, i){ return x === (x|0) && x >= 0 && x < QS[i].o.length; }); }
+
+function saveAns(a){ try { localStorage.setItem(STORE_KEY, JSON.stringify(a)); } catch(e){} }
+function loadAns(){ try { var v = JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); return validAns(v) ? v : null; } catch(e){ return null; } }
+function clearAns(){ try { localStorage.removeItem(STORE_KEY); } catch(e){} }
+
+var app = document.getElementById('app');
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function toTop(){ try { window.scrollTo({top:0, behavior:'auto'}); } catch(e){ window.scrollTo(0, 0); } }
+var toastEl = document.getElementById('toast'), toastT;
+function toast(msg){ toastEl.textContent = msg; toastEl.hidden = false; clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.hidden = true; }, 2600); }
+function baseUrl(){ return location.protocol === 'file:' ? location.href.split(/[?#]/)[0] : location.origin + location.pathname; }
+function shareUrl(type){ return baseUrl() + (type ? '?from=' + type : ''); }
+var BRAND = '<div class="brand"><b>KIM SAEHAE</b> · MY MONEY DNA TEST</div>';
+
+/* ---------------- 첫 화면 ---------------- */
+function renderStart(){
+  var from = Number(new URLSearchParams(location.search).get('from'));
+  var friend = TYPES[from] ? '<div class="friend">이 테스트를 보낸 친구는 <b>' + esc(TYPES[from].name) + '</b>이 나왔어요.<br>나는 어떤 유형일까요?</div>' : '';
+  app.innerHTML = BRAND +
+    '<section class="hero">' +
+      '<span class="eyebrow">김새해의 5분 돈 감정 테스트</span>' +
+      '<h1>나는 돈을 대하는<br>어떤 사람일까?</h1>' +
+      '<p class="sub">돈을 많이 벌고 적게 버는 것보다 중요한 것은<br>내가 돈을 대하는 방식입니다.</p>' +
+      '<div class="meta"><span>12문항</span><span>5분</span><span>8가지 유형</span><span>5가지 능력치</span></div>' +
+    '</section>' + friend +
+    '<section class="card">' +
+      '<h2>혹시 이런 생각을 해본 적 있나요?</h2>' +
+      '<ul class="checks">' + INTRO_CHECKS.map(function(c){ return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>' +
+      '<p class="p">돈에 대한 감정과 습관은 우리가 살아온 환경과 경험 속에서 만들어지기도 합니다.</p>' +
+      '<p class="p">12개의 질문에 답하면 당신이 돈 앞에서 반복하는 감정과 행동 패턴을 알아볼 수 있습니다.</p>' +
+      '<p class="p"><b>나를 탓하지 말고, 있는 그대로 답해보세요.</b></p>' +
+    '</section>' +
+    '<section class="card"><div class="kicker">결과에서 알 수 있는 것</div><h2>나만의 돈 감정 리포트</h2>' +
+      '<div class="preview"><div><b>01</b>8가지 중 나의 돈 감정 유형</div><div><b>02</b>5가지 돈 감정 능력치 그래프</div><div><b>03</b>돈과의 관계, 지금 나의 단계</div><div><b>04</b>나에게 맞는 이번 주 실천 3가지</div></div>' +
+    '</section>' +
+    '<button class="btn" id="startBtn">내 돈 감정 유형 알아보기</button>' +
+    '<p class="note">이 테스트는 심리학적으로 검증된 진단검사가 아니라<br>돈 습관을 돌아보는 자기성찰 콘텐츠입니다.</p>';
+  document.getElementById('startBtn').onclick = function(){ ans = []; step = 0; ask(); toTop(); };
+}
+
+/* ---------------- 질문 ---------------- */
+var ans = [], step = 0, picking = false;
+function ask(){
+  var q = QS[step];
+  app.innerHTML = BRAND +
+    '<div class="qtop"><span>나의 돈 감정 찾기</span><span>' + (step + 1) + ' / ' + QS.length + '</span></div>' +
+    '<div class="bar"><i id="barFill" style="width:' + (step / QS.length * 100) + '%"></i></div>' +
+    '<p class="qno">Q' + (step + 1) + '.</p>' +
+    '<h2 class="qtext">' + esc(q.t) + '</h2>' +
+    '<div class="opts" id="opts"></div>' +
+    (step > 0 ? '<button class="back" id="backBtn">이전 문항</button>' : '');
+  requestAnimationFrame(function(){ var f = document.getElementById('barFill'); if (f) f.style.width = ((step + 1) / QS.length * 100) + '%'; });
+  var box = document.getElementById('opts');
+  q.o.forEach(function(o, i){
+    var b = document.createElement('button');
+    b.className = 'opt' + (ans[step] === i ? ' on' : '');
+    b.innerHTML = '<span class="k">' + 'ABCD'.charAt(i) + '</span><span>' + esc(o[0]) + '</span>';
+    b.onclick = function(){
+      if (picking) return; picking = true;
+      Array.prototype.forEach.call(box.children, function(c){ c.classList.remove('on'); });
+      b.classList.add('on'); ans[step] = i;
+      setTimeout(function(){
+        picking = false;
+        if (step < QS.length - 1) { step++; ask(); toTop(); }
+        else { ans = ans.slice(0, QS.length); saveAns(ans); analyzing(); }
+      }, 260);
+    };
+    box.appendChild(b);
+  });
+  var back = document.getElementById('backBtn');
+  if (back) back.onclick = function(){ if (picking) return; step--; ask(); };
+}
+
+function analyzing(){
+  var msgs = ['돈 앞에서 올라오는 감정을 살펴보고 있어요', '반복되는 패턴을 찾고 있어요', '나에게 맞는 실천을 고르고 있어요'];
+  app.innerHTML = BRAND + '<div class="loading"><div class="spin"></div><h2>12개의 답을 분석하고 있어요</h2><p id="lmsg">' + msgs[0] + '</p></div>';
+  toTop();
+  var i = 0, iv = setInterval(function(){ i++; var el = document.getElementById('lmsg'); if (el && msgs[i]) el.textContent = msgs[i]; }, 650);
+  setTimeout(function(){ clearInterval(iv); showResult(ans, true); }, 2000);
+}
+
+/* ---------------- 오각형 ---------------- */
+function radarSvg(vals){
+  var W = 460, H = 300, cx = 230, cy = 156, R = 90, n = vals.length;
+  function pt(i, r){ var a = -Math.PI / 2 + i * 2 * Math.PI / n; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+  var grid = '';
+  [0.25, 0.5, 0.75, 1].forEach(function(f){
+    grid += '<polygon points="' + vals.map(function(_, i){ return pt(i, R * f).join(','); }).join(' ') + '" fill="' + (f === 1 ? '#FFF7F0' : 'none') + '" stroke="#F2D6CC" stroke-width="1"/>';
+  });
+  var axes = vals.map(function(_, i){ var p = pt(i, R); return '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0] + '" y2="' + p[1] + '" stroke="#F2D6CC"/>'; }).join('');
+  var poly = vals.map(function(v, i){ return pt(i, R * v / 100).join(','); }).join(' ');
+  var dots = vals.map(function(v, i){ var p = pt(i, R * v / 100); return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="4" fill="#E98272"/>'; }).join('');
+  var labels = vals.map(function(v, i){
+    var p = pt(i, R + 28), anchor = Math.abs(p[0] - cx) < 4 ? 'middle' : p[0] > cx ? 'start' : 'end';
+    var dy = i === 0 ? -8 : 0;
+    return '<text x="' + p[0] + '" y="' + (p[1] + dy) + '" text-anchor="' + anchor + '" font-size="15" font-weight="700" fill="#574047">' + esc(STATS[i].nm) + '</text>' +
+           '<text x="' + p[0] + '" y="' + (p[1] + dy + 19) + '" text-anchor="' + anchor + '" font-size="17" font-weight="800" fill="#E98272">' + v + '</text>';
+  }).join('');
+  return '<svg class="radar" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="5가지 돈 감정 능력치 그래프">' + grid + axes +
+    '<polygon points="' + poly + '" fill="rgba(233,130,114,.28)" stroke="#E98272" stroke-width="2.5" stroke-linejoin="round"/>' + dots + labels + '</svg>';
+}
+
+/* ---------------- 결과 ---------------- */
+var last = null, cardCanvas = null;
+function list(arr, tag){ return '<' + tag + '>' + arr.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</' + tag + '>'; }
+function paras(arr){ return arr.map(function(x){ return '<p class="p">' + esc(x) + '</p>'; }).join(''); }
+function changeHtml(t){ return paras(t.change) + (t.changeList ? list(t.changeList, 'ol') : '') + (t.changeAfter ? paras(t.changeAfter) : ''); }
+function mineHtml(t){ return '<ul class="mine">' + t.mine.map(function(x){ return '<li><span>✓</span>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
+
+function showResult(a, fresh){
+  var r = score(a); last = r;
+  var t = TYPES[r.main], second = r.mix ? TYPES[r.mix[1]] : null, st = STAGES[r.stage];
+  var no = ('0' + r.main).slice(-2);
+
+  var statRows = STATS.map(function(s, i){
+    var v = r.stats[i], b = band(v), lv = ['낮음', '보통', '높음'][b];
+    return '<div class="stat"><div class="hd"><span class="nm">' + esc(s.nm) + '<small>' + esc(s.ds) + '</small></span><span class="v">' + v + '</span></div>' +
+      '<div class="tr"><i data-w="' + v + '"></i></div>' +
+      '<div class="ds"><span class="lv ' + (b === 2 ? 'hi' : b === 0 ? 'lo' : '') + '">' + lv + '</span>' + esc(s.band[b]) + '</div></div>';
+  }).join('');
+  var bestI = r.stats.indexOf(Math.max.apply(null, r.stats)), lowI = r.stats.indexOf(Math.min.apply(null, r.stats));
+  var steps = STAGES.map(function(s, i){ return '<div class="' + (i < r.stage ? 'done' : i === r.stage ? 'now' : '') + '"><b>' + (i + 1) + '단계</b>' + esc(s.nm) + '</div>'; }).join('');
+  var distRows = r.order.map(function(k, i){
+    var pc = Math.round(r.norm[k] * 100);
+    return '<div class="row' + (i < 1 || (r.mix && r.mix.indexOf(k) >= 0) ? ' top' : '') + '"><span class="nm">' + esc(TYPES[k].name) + '</span><span class="tr"><i data-w="' + pc + '"></i></span><span class="pc">' + pc + '%</span></div>';
+  }).join('');
+  var m = TYPES[t.match];
+  var grid = [1,2,3,4,5,6,7,8].map(function(k){
+    return '<div class="' + (k === r.main || (r.mix && r.mix.indexOf(k) >= 0) ? 'me' : '') + '"><small>TYPE ' + ('0' + k).slice(-2) + '</small><b>' + esc(TYPES[k].name) + '</b>' + esc(TYPES[k].tag) + '</div>';
+  }).join('');
+
+  app.innerHTML = BRAND +
+    '<section class="rcard">' +
+      '<div class="who">나의 돈 감정 유형은?</div>' +
+      '<span class="no">TYPE ' + no + '</span>' +
+      '<h1>' + esc(t.name) + (second ? '<br><span class="plus">+</span> ' + esc(second.name) : '') + '</h1>' +
+      '<div class="tag">' + esc(t.tag) + '</div>' +
+      '<div class="en">' + esc(t.en) + '</div>' +
+      '<div class="quote">"' + esc(t.quote) + '"</div>' +
+      radarSvg(r.stats) +
+      '<div class="stage-pill">돈과의 관계 <i>' + (r.stage + 1) + '단계</i> · ' + esc(st.nm) + '</div>' +
+      (second ? '<p class="mixnote">두 유형의 점수가 같아요. 두 가지 특징이 함께 나타나는 복합 유형이에요.</p>' : '') +
+    '</section>' +
+    '<div class="actions">' +
+      '<button class="btn full" id="saveBtn">내 결과 이미지 저장하기</button>' +
+      '<button class="btn ghost" id="shareBtn">카카오톡으로 공유하기</button>' +
+      '<button class="btn ghost" id="copyBtn">테스트 링크 복사하기</button>' +
+    '</div>' +
+    '<p class="hint">저장한 이미지를 인스타그램 스토리로 공유해 보세요!</p>' +
+
+    '<section class="card"><div class="kicker">CHECK</div><h2>혹시 내 얘기인가요?</h2>' + mineHtml(t) + '</section>' +
+
+    '<section class="card"><div class="kicker">MY MONEY STATS</div><h2>나의 돈 감정 능력치</h2>' + statRows +
+      '<div class="nowbox" style="margin-top:14px"><dl><dt>가장 높은 능력치</dt><dd>' + esc(STATS[bestI].nm) + ' · ' + esc(STATS[bestI].band[band(r.stats[bestI])]) + '</dd>' +
+      '<dt>가장 먼저 키울 능력치</dt><dd>' + esc(STATS[lowI].nm) + ' · ' + esc(STATS[lowI].ds) + '</dd></dl></div></section>' +
+
+    '<section class="card"><div class="kicker">MY STAGE</div><h2>돈과의 관계, 나는 지금 어디쯤?</h2>' +
+      '<div class="steps">' + steps + '</div>' +
+      '<div class="nowbox"><dl><dt>지금</dt><dd>' + esc(st.now) + '</dd><dt>다음 단계로 가려면</dt><dd>' + esc(st.next) + '</dd></dl></div></section>' +
+
+    '<section class="card"><div class="kicker">TYPE PROFILE</div><h2>' + esc(t.name) + ' 한눈에 보기</h2>' +
+      '<table class="tbl">' + TABLE_ROWS.map(function(row){ return '<tr><th>' + row[1] + '</th><td>' + esc(t.table[row[0]]) + '</td></tr>'; }).join('') + '</table></section>' +
+
+    '<section class="card"><div class="kicker">ABOUT</div><h2>' + esc(t.name) + '은 이런 사람이에요</h2>' + paras(t.about) + '</section>' +
+
+    '<div class="two"><div class="box good"><h3>당신의 강점</h3>' + list(t.good, 'ul') + '</div><div class="box hard"><h3>반복되는 어려움</h3>' + list(t.hard, 'ul') + '</div></div>' +
+
+    '<section class="card change"><div class="kicker">CHANGE</div><h2>당신에게 필요한 변화</h2>' + changeHtml(t) + '</section>' +
+    '<section class="card"><div class="kicker">THIS WEEK</div><h2>이번 주 해 볼 실천 3가지</h2><ul class="tips">' +
+      t.tips.map(function(x){ return '<li><b>' + esc(x[0]) + '</b><p>' + esc(x[1]) + '</p></li>'; }).join('') + '</ul></section>' +
+    '<div class="mantra"><small>오늘 기억할 문장</small>' + esc(t.mantra) + '</div>' +
+
+    (second ?
+      '<section class="card second"><div class="kicker">ALSO</div><h2>함께 나타난 유형 · ' + esc(second.name) + '</h2>' +
+      '<p class="p"><b>' + esc(second.tag) + '</b><br>"' + esc(second.quote) + '"</p>' + mineHtml(second) +
+      '<h2 style="font-size:17px;margin:14px 0 8px">필요한 변화</h2>' + changeHtml(second) +
+      '<div class="mantra" style="margin-bottom:0"><small>오늘 기억할 문장</small>' + esc(second.mantra) + '</div></section>' : '') +
+
+    '<section class="card dist"><div class="kicker">MY MIX</div><h2>나의 돈 감정 구성</h2>' +
+      '<p class="p" style="font-size:14px;color:var(--soft)">사람은 한 가지 유형만으로 살지 않아요. 8가지 유형마다 내 답이 얼마나 가까웠는지 보여 드려요.</p>' + distRows + '</section>' +
+
+    '<section class="card"><div class="kicker">MATCH</div><h2>돈 앞에서 찰떡궁합! 나와 잘 맞는 유형</h2>' +
+      '<div class="match"><div class="bd">TYPE<br>' + ('0' + t.match).slice(-2) + '</div><div><b>' + esc(m.name) + '</b><span style="font-size:14px;color:var(--coral);font-weight:700">' + esc(m.tag) + '</span><p>' + esc(t.matchWhy) + '</p></div></div></section>' +
+
+    '<section class="card">' +
+      '<h2>당신의 돈 감정 유형을 확인했습니다.</h2>' +
+      '<p class="p">이 결과는 당신을 특정한 사람으로 규정하는 것이 아닙니다.</p>' +
+      '<p class="p">지금까지 살아오며 만들어진 돈에 대한 생각과 습관을 돌아보기 위한 자기성찰 도구입니다.</p>' +
+      '<p class="p">사람은 한 가지 유형만 가지고 살아가지 않습니다. 상황에 따라 여러 유형의 특징이 함께 나타날 수 있습니다.</p>' +
+      '<p class="p">중요한 것은 내가 어떤 사람인지 판단하는 것이 아니라, 앞으로 어떤 선택을 할 것인지 알아가는 것입니다.</p>' +
+      '<p class="p"><b>당신의 돈 습관은 바꿀 수 있습니다.</b></p>' +
+    '</section>' +
+
+    '<section class="card" style="text-align:center"><div class="kicker">FREE GIFT</div><h2>내 돈 감정, 7일 동안 바꿔 보기</h2>' +
+      '<p class="p">돈 감정 유형별 마음 이야기와 하루 3분 7일 체크리스트를 무료로 드려요. 이메일을 남기면 바로 볼 수 있어요.</p>' +
+      '<a class="btn" href="' + CHECKLIST_URL + '&utm_content=type' + r.main + '" target="_blank" rel="noopener">무료 7일 체크리스트 받기</a></section>' +
+
+    '<section class="cta">' +
+      '<h2>나의 돈 감정을 알았다면,<br>이제 돈을 대하는 습관을 바꿀 차례입니다.</h2>' +
+      '<p>우리는 돈을 버는 방법은 배우지만 돈을 대하는 생각과 감정을 돌아볼 기회는 많지 않습니다.</p>' +
+      '<p>돈이 있어도 불안한 이유, 나를 위해 돈을 쓰지 못하는 이유, 열심히 일해도 경제적으로 자유로워지지 않는 이유.</p>' +
+      '<p>그 반복되는 패턴을 이해하고 싶다면 다음 단계로 나아가 보세요.</p>' +
+      '<div class="prod"><b>머니시프트</b>돈을 바라보는 관점과 습관을 바꾸고, 더 나은 경제적 선택을 만들어 가는 과정.</div>' +
+      '<div class="fit"><b>' + esc(t.name) + '이라면</b> · ' + esc(t.fit) + '</div>' +
+      '<a class="btn" href="' + MONEYSHIFT_URL + '&utm_content=type' + r.main + '" target="_blank" rel="noopener">머니시프트 자세히 보기</a>' +
+    '</section>' +
+
+    '<section class="card"><div class="kicker">ALL TYPES</div><h2>8가지 돈 감정 유형</h2><div class="grid8">' + grid + '</div></section>' +
+
+    '<section class="card" style="text-align:center">' +
+      '<h2 style="font-size:19px">내 친구는 어떤 유형일까?</h2>' +
+      '<p class="p">나와 잘 맞는 유형인지 친구에게도 물어보세요.</p>' +
+      '<button class="btn" id="shareBtn2">테스트 공유하기</button>' +
+      '<button class="btn ghost" id="retryBtn" style="margin-top:10px">나도 다시 테스트하기</button>' +
+    '</section>' +
+    '<p class="foot">돈을 많이 버는 사람과 돈 앞에서 편안한 사람은 반드시 같지 않습니다.<br>돈을 대하는 나의 생각과 행동을 이해하는 것부터 경제적 성장이 시작됩니다.<br><br>이 테스트는 심리학적으로 검증된 진단검사가 아니라 돈 습관을 돌아보는 자기성찰 콘텐츠입니다.<br>응답 내용은 이 기기에만 잠시 저장되며 어디로도 전송되지 않습니다.<br>© 김새해 · 김새해의 5분 돈 감정 테스트</p>';
+
+  document.getElementById('saveBtn').onclick = saveImage;
+  document.getElementById('shareBtn').onclick = function(){ share(r.main); };
+  document.getElementById('shareBtn2').onclick = function(){ share(r.main); };
+  document.getElementById('copyBtn').onclick = function(){ copyText(shareUrl(r.main)).then(function(ok){ toast(ok ? '테스트 링크를 복사했어요.' : '링크를 길게 눌러 복사해 주세요.'); }); };
+  document.getElementById('retryBtn').onclick = function(){ clearAns(); ans = []; step = 0; history.replaceState(null, '', baseUrl()); renderStart(); toTop(); };
+  if (fresh) toTop();
+  setTimeout(function(){ Array.prototype.forEach.call(document.querySelectorAll('.tr i'), function(i){ i.style.width = i.getAttribute('data-w') + '%'; }); }, 150);
+  cardCanvas = null; drawCard(r).then(function(c){ cardCanvas = c; });
+}
+
+/* ---------------- 공유 ---------------- */
+function copyText(s){
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(s).then(function(){ return true; }, function(){ return legacyCopy(s); });
+  return Promise.resolve(legacyCopy(s));
+}
+function legacyCopy(s){
+  var ta = document.createElement('textarea'); ta.value = s; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand('copy'); } catch(e){}
+  document.body.removeChild(ta); return ok;
+}
+function share(type){
+  var url = shareUrl(type);
+  if (navigator.share) navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: url }).catch(function(){});
+  else copyText(SHARE_TEXT + '\n' + url).then(function(ok){ toast(ok ? '공유 문구와 링크를 복사했어요. 카카오톡에 붙여 넣어 주세요.' : '링크를 길게 눌러 복사해 주세요.'); });
+}
+
+/* ---------------- 결과 이미지 (1080×1920) ---------------- */
+function roundRect(x, X, Y, W, H, R){ x.beginPath(); x.moveTo(X+R, Y); x.arcTo(X+W, Y, X+W, Y+H, R); x.arcTo(X+W, Y+H, X, Y+H, R); x.arcTo(X, Y+H, X, Y, R); x.arcTo(X, Y, X+W, Y, R); x.closePath(); }
+function wrapLines(x, text, maxW){
+  var words = text.split(' '), lines = [], line = '';
+  words.forEach(function(w){ var tl = line ? line + ' ' + w : w; if (x.measureText(tl).width > maxW && line) { lines.push(line); line = w; } else line = tl; });
+  if (line) lines.push(line); return lines;
+}
+function drawCard(r){
+  var ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  return ready.then(function(){
+    var t = TYPES[r.main], second = r.mix ? TYPES[r.mix[1]] : null;
+    var W = 1080, H = 1920, C = W / 2, F = '"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+    var c = document.createElement('canvas'); c.width = W; c.height = H;
+    // 내용은 투명한 캔버스에 먼저 그리고, 카드 높이가 정해지면 배경 위에 얹는다
+    var k = document.createElement('canvas'); k.width = W; k.height = H;
+    var x = k.getContext('2d');
+    x.textAlign = 'center';
+    x.fillStyle = '#574047'; x.font = '800 36px ' + F; x.fillText('KIM SAEHAE', C, 300);
+    x.fillStyle = '#D98C91'; x.font = '700 28px ' + F; x.fillText('MY MONEY DNA TEST', C, 344);
+    var cardTop = 400;
+    x.fillStyle = '#D98C91'; x.font = '700 36px ' + F; x.fillText('나의 돈 감정 유형은?', C, 490);
+    x.font = '800 26px ' + F; var badge = 'TYPE ' + ('0' + r.main).slice(-2) + '  ·  ' + t.en; var bw = x.measureText(badge).width + 56;
+    x.fillStyle = '#574047'; roundRect(x, C - bw / 2, 520, bw, 50, 25); x.fill();
+    x.fillStyle = '#FFFFFF'; x.fillText(badge, C, 555);
+    var y = 660;
+    x.fillStyle = '#574047'; x.font = '800 ' + (second ? 76 : 92) + 'px ' + F; x.fillText(t.name, C, y);
+    if (second) { y += 76; x.fillStyle = '#E98272'; x.font = '800 54px ' + F; x.fillText('+ ' + second.name, C, y); }
+    y += 62; x.fillStyle = '#E98272'; x.font = '700 38px ' + F; x.fillText(t.tag, C, y);
+    x.font = '700 34px ' + F; var ql = wrapLines(x, '"' + t.quote + '"', W - 330).slice(0, 3);
+    var qh = 46 + ql.length * 50; y += 34;
+    x.fillStyle = '#FFF7F0'; roundRect(x, 150, y, W - 300, qh, 28); x.fill();
+    x.fillStyle = '#574047'; ql.forEach(function(l, i){ x.fillText(l, C, y + 58 + i * 50); });
+    y += qh;
+    var cy = y + 290, R = 150, n = 5;
+    function pt(i, rr){ var a = -Math.PI / 2 + i * 2 * Math.PI / n; return [C + rr * Math.cos(a), cy + rr * Math.sin(a)]; }
+    [0.25, 0.5, 0.75, 1].forEach(function(f){
+      x.beginPath(); for (var i = 0; i < n; i++) { var p = pt(i, R * f); if (i) x.lineTo(p[0], p[1]); else x.moveTo(p[0], p[1]); } x.closePath();
+      if (f === 1) { x.fillStyle = '#FFF7F0'; x.fill(); }
+      x.strokeStyle = '#F2D6CC'; x.lineWidth = 2; x.stroke();
+    });
+    for (var i = 0; i < n; i++) { var p = pt(i, R); x.beginPath(); x.moveTo(C, cy); x.lineTo(p[0], p[1]); x.strokeStyle = '#F2D6CC'; x.stroke(); }
+    x.beginPath(); r.stats.forEach(function(v, i){ var p = pt(i, R * v / 100); if (i) x.lineTo(p[0], p[1]); else x.moveTo(p[0], p[1]); }); x.closePath();
+    x.fillStyle = 'rgba(233,130,114,.30)'; x.fill(); x.strokeStyle = '#E98272'; x.lineWidth = 5; x.lineJoin = 'round'; x.stroke();
+    r.stats.forEach(function(v, i){ var p = pt(i, R * v / 100); x.beginPath(); x.arc(p[0], p[1], 8, 0, Math.PI * 2); x.fillStyle = '#E98272'; x.fill(); });
+    r.stats.forEach(function(v, i){
+      var p = pt(i, R + 50), al = Math.abs(p[0] - C) < 5 ? 'center' : p[0] > C ? 'left' : 'right';
+      var dy = i === 0 ? -16 : 0;
+      x.textAlign = al; x.fillStyle = '#574047'; x.font = '700 28px ' + F; x.fillText(STATS[i].nm, p[0], p[1] + dy);
+      x.fillStyle = '#E98272'; x.font = '800 32px ' + F; x.fillText(String(v), p[0], p[1] + dy + 36);
+    });
+    x.textAlign = 'center';
+    var sy = cy + R + 120, stl = '돈과의 관계 ' + (r.stage + 1) + '단계 · ' + STAGES[r.stage].nm;
+    x.font = '800 32px ' + F; var sw = x.measureText(stl).width + 64;
+    x.fillStyle = '#FCE8DF'; roundRect(x, C - sw / 2, sy - 42, sw, 62, 31); x.fill();
+    x.fillStyle = '#574047'; x.fillText(stl, C, sy);
+    // 카드 배경은 내용 높이에 맞춰 마지막에 깔고, 그 위에 내용을 다시 그린다
+    var cardBottom = sy + 60;
+    var g = c.getContext('2d');
+    g.fillStyle = '#FFF7F0'; g.fillRect(0, 0, W, H);
+    g.fillStyle = '#FCE8DF'; g.beginPath(); g.arc(W - 90, 300, 210, 0, Math.PI * 2); g.fill();
+    g.beginPath(); g.arc(80, 1690, 170, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#FFFFFF'; roundRect(g, 70, cardTop, W - 140, cardBottom - cardTop, 52); g.fill();
+    g.drawImage(k, 0, 0);
+    x = g; x.textAlign = 'center';
+    var fy = cardBottom + 92;
+    if (fy + 120 <= 1700) {
+      x.fillStyle = '#574047'; x.font = '600 34px ' + F;
+      x.fillText('돈을 대하는 마음을 이해하면', C, fy); x.fillText('삶의 선택이 달라집니다.', C, fy + 52); fy += 120;
+    }
+    x.fillStyle = '#E98272'; x.font = '800 36px ' + F; x.fillText('김새해의 5분 돈 감정 테스트', C, Math.min(fy, 1720));
+    return c;
+  });
+}
+function saveImage(){
+  if (!last) return;
+  if (!cardCanvas) { toast('이미지를 만들고 있어요. 잠시 뒤 다시 눌러 주세요.'); return; }
+  var name = '김새해_돈감정테스트_' + TYPES[last.main].name.replace(/\s/g, '') + '.png';
+  var phone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  cardCanvas.toBlob(function(blob){
+    if (!blob) { toast('이미지를 만들지 못했어요.'); return; }
+    var file = null; try { file = new File([blob], name, { type: 'image/png' }); } catch(e){}
+    if (phone && file && navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: SHARE_TITLE }).catch(function(){}); return; }
+    var url = URL.createObjectURL(blob);
+    if (phone) { document.getElementById('modalImg').src = url; document.getElementById('modal').hidden = false; return; }
+    var a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    toast('결과 이미지를 저장했어요.');
+  }, 'image/png');
+}
+document.getElementById('modalClose').onclick = function(){ document.getElementById('modal').hidden = true; };
+
+var saved = loadAns(), cameFromShare = new URLSearchParams(location.search).has('from');
+if (saved && !cameFromShare) { ans = saved; showResult(saved, false); } else renderStart();
+window.__moneyDna = { QS: QS, TYPES: TYPES, STATS: STATS, MAX: MAX, score: score };
+})();
+</script>
+</body>
+</html>
