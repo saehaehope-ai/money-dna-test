@@ -157,6 +157,29 @@ button{font-family:inherit;cursor:pointer}
 .modal .in{background:var(--white);border-radius:20px;padding:16px;max-width:420px;width:100%;text-align:center}
 .modal img{width:100%;border-radius:12px;display:block;margin-bottom:10px;max-height:70vh;object-fit:contain}
 .foot{font-size:12px;color:var(--soft);text-align:center;margin-top:24px;line-height:1.7}
+/* 결과 일부 공개 + 이메일 안내 */
+.peek .lead{font-size:19px;font-weight:800;line-height:1.5;margin-bottom:10px}
+.peek .lead b{color:var(--coral)}
+.peek .habit{background:var(--cream);border-radius:14px;padding:12px 14px;margin:12px 0 14px;font-weight:700}
+.peek .habit small{display:block;font-size:12px;letter-spacing:.06em;color:var(--rose);font-weight:800;margin-bottom:2px}
+.peek .ask{font-size:17px;font-weight:800;text-align:center;color:var(--mauve);margin:0}
+.locked{position:relative;background:var(--white);border-radius:22px;padding:8px 18px;margin:16px 0;box-shadow:0 2px 14px rgba(87,64,71,.06)}
+.lk{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.lk:first-child{border-top:0}
+.lk .ic{flex:0 0 34px;height:34px;border-radius:50%;background:var(--peach);display:flex;align-items:center;justify-content:center;font-size:15px}
+.lk small{display:block;font-size:11px;letter-spacing:.12em;font-weight:800;color:var(--rose)}
+.lk b{display:block;font-size:15px;line-height:1.45;filter:blur(.2px)}
+.gate{background:linear-gradient(180deg,var(--peach) 0%,#FFF1EA 100%);border-radius:26px;padding:28px 22px 24px;margin:18px 0 14px;box-shadow:0 8px 24px rgba(233,130,114,.18)}
+.gate h2{font-size:23px;line-height:1.4;font-weight:800;margin-bottom:12px}
+.gate p{margin-bottom:10px}
+.gate ol{margin:4px 0 14px;padding-left:22px}
+.gate li{margin-bottom:4px;font-weight:600}
+.gate .close{font-weight:800;margin-bottom:16px}
+.gate .gnote{font-size:13px;color:var(--soft);margin:12px 0 0;line-height:1.6}
+.btn.busy{opacity:.7;pointer-events:none}
+.actions.one{grid-template-columns:1fr}
+.cta.book{text-align:center}
+.cta.book .cover{display:block;width:58%;max-width:220px;margin:0 auto 18px;border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,.28)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -370,9 +393,51 @@ var TABLE_ROWS = [['see','돈은 나에게'],['trig','마음이 흔들리는 순
 
 var SHARE_TITLE = '나는 돈을 대하는 어떤 사람일까?';
 var SHARE_TEXT = '나는 김새해의 2분 돈 감정 테스트를 해봤어.\n내가 돈 앞에서 어떤 생각을 하고 어떤 행동을 반복하는지 알게 됐어.\n생각보다 나 자신을 돌아보게 되는 테스트야.\n너도 한번 해봐!';
-var CHECKLIST_URL = 'https://docurise.io/saehaekim/d/money-check?utm_source=money_dna_test&utm_medium=test&utm_campaign=money_dna';
-var MONEYSHIFT_URL = 'https://docurise.io/saehaekim/d/money-shift?utm_source=money_dna_test&utm_medium=test&utm_campaign=money_dna';
 var STORE_KEY = 'saehae_money_dna_v2';
+
+/* ---------------- 이메일 게이트 ----------------
+   상세 결과는 유형별 DocuRise 결과 페이지(이메일 게이트)에서 이메일을 남겨야 열린다.
+   이메일 · 동의 정보는 이 페이지를 거치지 않고 DocuRise에만 저장된다.
+   DocuRise 결과 페이지(이메일 입력 후 보이는 영역)와 결과 메일에 있는 링크의 unlock 코드가 맞으면 이 기기에서 전체 리포트가 열린다.
+   코드 원문은 여기에 없고, 해시만 둔다. */
+var RESULT_POST = 'https://docurise.io/saehaekim/d/money-dna-r';
+var UNLOCK_HASH = {
+  1:'6ce038b478c8bde828ab4237f82123c0660c7a9ea0b2afa36debec2f93bd98c9', 2:'98b0efc7dc0d972d9012e81388f2b07ea4e904de887c2839f71b2bbc5c82e7b0',
+  3:'d8920bc45837ede8f35b1c23deffad2d7801342d68eff392b69b3eac71d9d837', 4:'d0a4ae44684269e3ebebbb85e59289a0d0583a678d2ebef4495058a6cea79d75',
+  5:'90792a95a78f50005578f2e5a7ab08605dcde414fbc9c935857ceb663fd40565', 6:'663ff0b80fee75d068fbbcda091e4dd5a1d66e09975f7d5ffdf50af9e684069e',
+  7:'9d9218e4f8e01baba81bedd29966366d5f05af045019cf4da0b06a13b53c40e7', 8:'c83a89673f8982a8c51b8f72a1c486727071e49f8b89b019479b9821d7816c4f'
+};
+var UNLOCK_KEY = 'saehae_money_dna_unlocked';
+var BOOK_URL = 'https://smartstore.naver.com/artandbooks/products/13740273978';
+var BOOK_COVER = 'moneyshift-cover.jpg';
+function isUnlocked(){ try { return localStorage.getItem(UNLOCK_KEY) === '1'; } catch(e){ return false; } }
+function setUnlocked(){ try { localStorage.setItem(UNLOCK_KEY, '1'); } catch(e){} }
+// 들어온 UTM은 유지하고 unlock 코드만 주소창에서 지운다
+function stripUnlockParam(){
+  var q = new URLSearchParams(location.search); if (!q.has('unlock')) return;
+  q.delete('unlock'); var s = q.toString();
+  history.replaceState(null, '', baseUrl() + (s ? '?' + s : '') + location.hash);
+}
+function sha256Hex(s){
+  if (!(window.crypto && crypto.subtle && window.TextEncoder)) return Promise.resolve('');
+  return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function(buf){
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){ return ('0' + b.toString(16)).slice(-2); }).join('');
+  }, function(){ return ''; });
+}
+function checkUnlock(){
+  var code = new URLSearchParams(location.search).get('unlock');
+  if (!code) return Promise.resolve(false);
+  return sha256Hex(code).then(function(h){
+    var ok = false; for (var k in UNLOCK_HASH) if (UNLOCK_HASH[k] === h) ok = true;
+    if (ok) setUnlocked();
+    stripUnlockParam();
+    return ok;
+  });
+}
+function resultPostUrl(type){
+  var q = new URLSearchParams(location.search), src = q.get('utm_source') || 'direct';
+  return RESULT_POST + type + '?utm_source=money_dna_test&utm_medium=result_gate&utm_campaign=money_dna&utm_content=type' + type + '_from_' + encodeURIComponent(src);
+}
 
 /* ---------------- 계산 ---------------- */
 var MAX = {};
@@ -502,6 +567,60 @@ function changeHtml(t){ return paras(t.change) + (t.changeList ? list(t.changeLi
 function mineHtml(t){ return '<ul class="mine">' + t.mine.map(function(x){ return '<li><span>✓</span>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
 
 function showResult(a, fresh){
+  if (isUnlocked()) showFull(a, fresh); else showPreview(a, fresh);
+}
+
+/* ---------------- 결과 일부 공개 + 이메일 안내 ---------------- */
+var LOCKED = [['MIND STORY', '이 유형은 왜 만들어졌을까? · 마음 이야기'], ['PATTERN', '돈 앞에서 반복하는 생각과 행동'], ['MY MONEY STATS', '5가지 능력치 그래프와 돈과의 관계 단계'], ['CHANGE', '나에게 필요한 변화와 이번 주 실천 3가지'], ['7 DAYS', '하루 3분, 7일 돈 습관 리셋 체크리스트']];
+function showPreview(a, fresh){
+  var r = score(a); last = r;
+  var t = TYPES[r.main], second = r.mix ? TYPES[r.mix[1]] : null;
+  var no = ('0' + r.main).slice(-2);
+  app.innerHTML = BRAND +
+    '<section class="rcard">' +
+      '<div class="who">나의 돈 감정 유형은?</div>' +
+      '<span class="no">TYPE ' + no + '</span>' +
+      '<h1>' + esc(t.name) + (second ? '<br><span class="plus">+</span> ' + esc(second.name) : '') + '</h1>' +
+      '<div class="tag">' + esc(t.tag) + '</div>' +
+      '<div class="en">' + esc(t.en) + '</div>' +
+      '<div class="quote">"' + esc(t.quote) + '"</div>' +
+      (second ? '<p class="mixnote">두 유형의 점수가 같아요. 두 가지 특징이 함께 나타나는 복합 유형이에요.</p>' : '') +
+    '</section>' +
+    '<section class="card peek">' +
+      '<p class="lead">당신의 돈 감정 유형은 <b>' + esc(t.name) + '</b>입니다.</p>' +
+      '<p class="p">' + esc(t.about[0]) + '</p>' +
+      '<div class="habit"><small>대표적인 돈 습관</small>' + esc(t.table.habit) + '</div>' +
+      '<p class="ask">그렇다면 이 유형은 왜 만들어졌고,<br>어떻게 바꿀 수 있을까요?</p>' +
+    '</section>' +
+    '<section class="locked" aria-label="이메일을 남기면 열리는 상세 결과">' +
+      LOCKED.map(function(x){ return '<div class="lk"><span class="ic" aria-hidden="true">🔒</span><div><small>' + x[0] + '</small><b>' + esc(x[1]) + '</b></div></div>'; }).join('') +
+    '</section>' +
+    '<section class="gate" id="gate">' +
+      '<div class="kicker">FREE · 상세 결과</div>' +
+      '<h2>내 돈 감정, 7일 동안 바꿔 보기</h2>' +
+      '<p>테스트를 완료하셨습니다.<br>당신이 돈을 대하는 방식에는 지금까지 살아온 경험과 감정이 담겨 있습니다.</p>' +
+      '<p>이메일을 남기시면 다음 내용을 보내드립니다.</p>' +
+      '<ol><li>나의 돈 감정 유형 상세 분석</li><li>이 유형이 돈을 대할 때 반복하는 생각과 행동</li><li>돈에 대한 감정을 이해하는 유형별 마음 이야기</li><li>하루 3분, 7일 돈 습관 리셋 체크리스트</li></ol>' +
+      '<p class="close">내 돈을 이해하는 것에서부터 변화가 시작됩니다.</p>' +
+      '<a class="btn" id="gateBtn" href="' + esc(resultPostUrl(r.main)) + '">내 상세 결과와 7일 체크리스트 받기</a>' +
+      '<p class="gnote">다음 화면에서 이메일을 입력하면 상세 결과가 바로 열리고, 같은 내용을 이메일로도 보내드려요.<br>좋은 생각 뉴스레터 구독은 선택이에요. 동의하지 않아도 결과와 체크리스트는 그대로 받으실 수 있어요.</p>' +
+    '</section>' +
+    '<div class="actions one"><button class="btn ghost full" id="copyBtn">친구에게 보낼 링크 복사하기</button></div>' +
+    '<button class="back" id="retryBtn" style="display:block;margin:6px auto 0">테스트 다시 하기</button>' +
+    '<p class="foot">이 테스트는 심리학적으로 검증된 진단검사가 아니라 돈 습관을 돌아보는 자기성찰 콘텐츠입니다.<br>응답 내용은 이 기기에만 저장되며, 이메일은 다음 화면(DocuRise)에서만 입력받습니다.<br>© 김새해 · 김새해의 2분 돈 감정 테스트</p>';
+  var gb = document.getElementById('gateBtn');
+  gb.onclick = function(ev){
+    if (gb.classList.contains('busy')) { ev.preventDefault(); return; }
+    gb.classList.add('busy'); gb.textContent = '상세 결과 페이지를 여는 중이에요…';
+    setTimeout(function(){ gb.classList.remove('busy'); gb.textContent = '내 상세 결과와 7일 체크리스트 받기'; }, 4000);
+  };
+  document.getElementById('copyBtn').onclick = function(){ copyShare(r.main); };
+  document.getElementById('retryBtn').onclick = function(){ clearAns(); ans = []; step = 0; renderStart(); toTop(); };
+  if (fresh) toTop();
+}
+
+/* ---------------- 전체 리포트 (이메일 입력 뒤) ---------------- */
+function showFull(a, fresh){
   var r = score(a); last = r;
   var t = TYPES[r.main], second = r.mix ? TYPES[r.mix[1]] : null, st = STAGES[r.stage];
   var no = ('0' + r.main).slice(-2);
@@ -584,18 +703,16 @@ function showResult(a, fresh){
       '<p class="p"><b>당신의 돈 습관은 바꿀 수 있습니다.</b></p>' +
     '</section>' +
 
-    '<section class="card" style="text-align:center"><div class="kicker">FREE GIFT</div><h2>내 돈 감정, 7일 동안 바꿔 보기</h2>' +
-      '<p class="p">돈 감정 유형별 마음 이야기와 하루 3분 7일 체크리스트를 무료로 드려요. 이메일을 남기면 바로 볼 수 있어요.</p>' +
-      '<a class="btn" href="' + CHECKLIST_URL + '&utm_content=type' + r.main + '" target="_blank" rel="noopener">무료 7일 체크리스트 받기</a></section>' +
+    '<section class="card" style="text-align:center"><div class="kicker">7 DAYS · 3 MIN</div><h2>하루 3분, 7일 돈 습관 리셋 체크리스트</h2>' +
+      '<p class="p">상세 결과와 7일 체크리스트는 이메일로도 보내드렸어요. 언제든 내 결과 페이지에서 다시 볼 수 있어요.</p>' +
+      '<a class="btn" href="' + esc(resultPostUrl(r.main)) + '" target="_blank" rel="noopener">내 결과 페이지에서 체크리스트 보기</a></section>' +
 
-    '<section class="cta">' +
-      '<h2>나의 돈 감정을 알았다면,<br>이제 돈을 대하는 습관을 바꿀 차례입니다.</h2>' +
-      '<p>우리는 돈을 버는 방법은 배우지만 돈을 대하는 생각과 감정을 돌아볼 기회는 많지 않습니다.</p>' +
-      '<p>돈이 있어도 불안한 이유, 나를 위해 돈을 쓰지 못하는 이유, 열심히 일해도 경제적으로 자유로워지지 않는 이유.</p>' +
-      '<p>그 반복되는 패턴을 이해하고 싶다면 다음 단계로 나아가 보세요.</p>' +
-      '<div class="prod"><b>머니시프트</b>돈을 바라보는 관점과 습관을 바꾸고, 더 나은 경제적 선택을 만들어 가는 과정.</div>' +
+    '<section class="cta book">' +
+      '<img class="cover" src="' + BOOK_COVER + '" alt="머니시프트 책 표지" onerror="this.remove()">' +
+      '<h2>돈을 대하는 생각이 달라지면<br>행동이 달라집니다.</h2>' +
+      '<p>나의 돈 감정을 이해했다면 이제 돈을 대하는 습관을 바꿔보세요.</p>' +
       '<div class="fit"><b>' + esc(t.name) + '이라면</b> · ' + esc(t.fit) + '</div>' +
-      '<a class="btn" href="' + MONEYSHIFT_URL + '&utm_content=type' + r.main + '" target="_blank" rel="noopener">머니시프트 자세히 보기</a>' +
+      '<a class="btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">머니시프트 자세히 보기</a>' +
     '</section>' +
 
     '<section class="card"><div class="kicker">ALL TYPES</div><h2>8가지 돈 감정 유형</h2><div class="grid8">' + grid + '</div></section>' +
@@ -611,7 +728,12 @@ function showResult(a, fresh){
   document.getElementById('saveBtn').onclick = saveImage;
   document.getElementById('shareBtn2').onclick = function(){ share(r.main); };
   document.getElementById('copyBtn').onclick = function(){ copyShare(r.main); };
-  document.getElementById('retryBtn').onclick = function(){ clearAns(); ans = []; step = 0; history.replaceState(null, '', baseUrl()); renderStart(); toTop(); };
+  document.getElementById('retryBtn').onclick = function(){
+    clearAns(); ans = []; step = 0;
+    var q = new URLSearchParams(location.search); q.delete('from'); var s = q.toString();
+    history.replaceState(null, '', baseUrl() + (s ? '?' + s : ''));
+    renderStart(); toTop();
+  };
   if (fresh) toTop();
   setTimeout(function(){ Array.prototype.forEach.call(document.querySelectorAll('.tr i'), function(i){ i.style.width = i.getAttribute('data-w') + '%'; }); }, 150);
   cardCanvas = null; drawCard(r).then(function(c){ cardCanvas = c; });
@@ -740,7 +862,12 @@ document.getElementById('modalClose').onclick = function(){ document.getElementB
 document.getElementById('copyClose').onclick = function(){ document.getElementById('copyModal').hidden = true; };
 
 var saved = loadAns(), cameFromShare = new URLSearchParams(location.search).has('from');
-if (saved && !cameFromShare) { ans = saved; showResult(saved, false); } else renderStart();
+checkUnlock().then(function(justUnlocked){
+  if (saved && !cameFromShare) { ans = saved; showResult(saved, false); if (justUnlocked) toast('상세 결과가 열렸어요. 전체 리포트를 확인해 보세요.'); }
+  else { renderStart(); if (justUnlocked) toast('상세 결과가 열렸어요. 이 기기에서 테스트를 하면 전체 리포트를 볼 수 있어요.'); }
+});
+// 다른 탭에서 결과 페이지를 열고 돌아오거나, 뒤로 가기로 돌아왔을 때 화면을 다시 맞춘다
+window.addEventListener('pageshow', function(ev){ if (ev.persisted && last && isUnlocked() && !document.querySelector('.cta.book')) { var s2 = loadAns(); if (s2) showResult(s2, false); } });
 window.__moneyDna = { QS: QS, TYPES: TYPES, STATS: STATS, MAX: MAX, score: score };
 })();
 </script>
